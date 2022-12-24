@@ -21,28 +21,17 @@ request.trust_env = False
 item_id = "7165404922857442565"
 threads = 1000
 
-views   = 0
 success = 0
 failed  = 0
 a       = "{"
 b       = "}"
 
-def vps() -> None:
-  global views
-  global success
-  while True:
-    before = success
-    sleep(1)
-    after = success
-    views = (after - before)
-
 def stats() -> None:
-  global views
   global success
   global failed
   while True:
     system("cls")
-    print(f"\n {Col.white}{a}{Col.purple}x{Col.white}{b}" + f" - Sent: {Col.purple}{success}{Col.white} | Failed: {Col.purple}{failed}{Col.white} | VPS: {Col.purple}{views}")
+    print(f"\n {Col.white}{a}{Col.purple}x{Col.white}{b}" + f" - Sent: {Col.purple}{success}{Col.white} | Failed: {Col.purple}{failed}{Col.white}")
     sleep(0.5)
 
 def random_string(k: int) -> str:
@@ -114,6 +103,5 @@ async def run_views(threads: int, item_id: str) -> None:
 if __name__ == "__main__":
   proxies = open("proxies.txt", "r").read().splitlines()
   system("cls")
-  Thread(target=vps).start()
   Thread(target=stats).start()
   get_event_loop().run_until_complete(ensure_future(run_views(threads, item_id)))
